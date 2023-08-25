@@ -1,0 +1,60 @@
+
+/* Section styles */
+.section-container {
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    padding: 20px;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.section {
+    flex-basis: calc(33.33% - 40px);
+    box-sizing: border-box;
+    margin-bottom: 20px;
+}
+
+
+
+/* Smooth scrolling */
+html {
+    scroll-behavior: smooth;
+}
+
+/* Button animation */
+.animated-button {
+    background-color: #e74c3c;
+    color: #fff;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.6s ease-in-out;
+}
+
+.animated-button:hover {
+    background-color: #000;
+    color: gold;
+}
+
+/* Keyframe animation for content */
+@keyframes fadeIn {
+    0% {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    100% {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Footer styles */
+footer {
+    padding: 10px;
+    text-align: center;
+    background: rgba(0, 0, 0, 0.7);
+    
+}
+

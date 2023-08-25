@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="test2.css">
+    <link rel="stylesheet" href="index.css">
+    <title>CSS Transitions and Transformations</title>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <div class="nav-toggle">
+            <div class="bar"></div>
+            <div class="bar"></div>
+            <div class="bar"></div>
+        </div>
+        <nav>
+            <ul>
+                <li><a href="index.html">Home</a></li>
+                <li><a href="test1.html">Test 1</a></li>
+                <li><a href="test2.html">Test 2</a></li>
+                
+            </ul>
+        </nav>
+    </header>
+    <!-- End of Header -->
+        
+    <h1>CSS Transitions and Transformations</h1>
+
+    <main>
+        <!-- Interactive UI Elements -->
+        <div class="interactive-elements">
+            <h1>Buttons</h1>
+            <button class="btn">Button</button>
+        </div>
+
+        <div class="interactive-elements">
+            <h1> Slider</h1>
+            <input type="range" class="slider">
+        </div>
+
+        <div class="interactive-elements">
+            <h1>Toggle</h1>
+            <label class="toggle">
+                <input type="checkbox">
+                <span class="slider"></span>
+            </label>
+        </div>
+
+        <!-- Pseudo-Elements -->
+        <section class="pseudo-elements">
+            <div class="container">
+                <div class="box">
+                    <p>Content</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- 3D Element -->
+        <div class="three-d-element">
+            <div class="cube">
+                <div class="face front">Front</div>
+                <div class="face back">Back</div>
+                <div class="face left">Left</div>
+                <div class="face right">Right</div>
+                <div class="face top">Top</div>
+                <div class="face bottom">Bottom</div>
+            </div>
+        </div>
+
+        <!-- Custom Cursors -->
+        <div class="custom-cursor-element"></div>
+        
+    </main>
+
+    <script>
+        document.addEventListener("mousemove", (e) => {
+            const customCursor = document.querySelector(".custom-cursor-element");
+            const x = e.clientX - 20;
+            const y = e.clientY - 20;
+            customCursor.style.transform = `translate(${x}px, ${y}px)`;
+        });
+        document.addEventListener("DOMContentLoaded", function () {
+            const navToggle = document.querySelector(".nav-toggle");
+            const nav = document.querySelector("nav");
+            navToggle.addEventListener("click", function () {
+                nav.classList.toggle("active");
+            });
+        });
+    </script>
+
+</body>
+</html>
