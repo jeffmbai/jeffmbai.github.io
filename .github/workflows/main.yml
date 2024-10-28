@@ -25,11 +25,11 @@ jobs:
 
       - name: Deploy to GitHub Pages
         env:
-          ACTIONS_DEPLOY_TOKEN: ${{ secrets.ACTIONS_DEPLOY_TOKEN }}
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}  # Use the default token
         run: |
           git config --global user.email "you@example.com"
           git config --global user.name "GitHub Actions"
-          git remote set-url origin https://x-access-token:${{ secrets.ACTIONS_DEPLOY_TOKEN }}@github.com/jeffmbai/portfoliov2.git
+          git remote set-url origin https://x-access-token:${{ secrets.GITHUB_TOKEN }}@github.com/jeffmbai/portfoliov2.git
           
           # Create the gh-pages branch if it doesn't exist
           git fetch origin gh-pages || git checkout --orphan gh-pages
