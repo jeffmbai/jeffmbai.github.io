@@ -30,22 +30,16 @@ jobs:
           git config --global user.email "you@example.com"
           git config --global user.name "GitHub Actions"
 
-          # Check if the gh-pages branch exists, if not, create it
-          if git show-ref --quiet refs/heads/gh-pages; then
-            git checkout gh-pages
-          else
-            git checkout --orphan gh-pages
-            git commit --allow-empty -m "Initial commit for gh-pages"
-          fi
-
+          # Create the gh-pages branch if it doesn't exist
+          git fetch origin gh-pages || git checkout --orphan gh-pages
           git reset --hard
 
-          # Check if the build directory exists and copy files
-          if [ -d "build" ]; then
-            cp -r build/* .  # Copy contents of the build directory to root
+          # Check if the dist directory exists and copy files
+          if [ -d "dist" ]; then
+            cp -r dist/* .  # Copy contents of the dist directory to root
           else
-            echo "Build directory does not exist, creating a placeholder."
-            mkdir build
+            echo "Dist directory does not exist. Aborting deployment."
+            exit 1  # Exit the script if the dist directory doesn't exist
           fi
 
           git add .
