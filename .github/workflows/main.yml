@@ -3,29 +3,33 @@ name: Deploy to GitHub Pages
 on:
   push:
     branches:
-      - master  # Replace with your deployment branch
+      - main
 
 jobs:
   deploy:
     runs-on: ubuntu-latest
 
     steps:
-    - name: Checkout the repository
-      uses: actions/checkout@v3
+      - name: Checkout repository
+        uses: actions/checkout@v2
 
-    - name: Set up Node.js
-      uses: actions/setup-node@v3
-      with:
-        node-version: '14' # Use your project’s node version
+      - name: Set up Node.js
+        uses: actions/setup-node@v2
+        with:
+          node-version: '14' # or the version you need
 
-    - name: Install dependencies
-      run: npm install
+      - name: Build project
+        run: |
+          npm install
+          npm run build
 
-    - name: Build the project
-      run: npm run build
-
-    - name: Deploy to GitHub Pages
-      uses: peaceiris/actions-gh-pages@v3
-      with:
-        github_token: ${{ secrets.GITHUB_TOKEN }}
-        publish_dir: ./build  # Replace with your build output directory
+      - name: Deploy to GitHub Pages
+        env:
+          ACTIONS_DEPLOY_TOKEN: ${{ secrets.ACTIONS_DEPLOY_TOKEN }}
+        run: |
+          git config --global user.email "you@example.com"
+          git config --global user.name "GitHub Actions"
+          git remote set-url origin https://x-access-token:${{ secrets.ACTIONS_DEPLOY_TOKEN }}@github.com/jeffmbai/portfoliov2.git
+          git add .
+          git commit -m "Deploy updates from GitHub Actions"
+          git push origin main
