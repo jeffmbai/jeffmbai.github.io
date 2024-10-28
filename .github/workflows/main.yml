@@ -24,13 +24,10 @@ jobs:
           npm run build
 
       - name: Deploy to GitHub Pages
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}  # Use the default token
         run: |
           git config --global user.email "you@example.com"
           git config --global user.name "GitHub Actions"
-          git remote set-url origin https://x-access-token:${{ secrets.GITHUB_TOKEN }}@github.com/jeffmbai/portfoliov2.git
-          
+
           # Create the gh-pages branch if it doesn't exist
           git fetch origin gh-pages || git checkout --orphan gh-pages
           git reset --hard
@@ -42,7 +39,7 @@ jobs:
             echo "Build directory does not exist, creating a placeholder."
             mkdir build
           fi
-          
+
           git add .
           git commit -m "Deploy updates from GitHub Actions" || echo "No changes to commit"
           git push --force origin gh-pages
