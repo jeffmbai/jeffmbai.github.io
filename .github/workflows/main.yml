@@ -3,7 +3,7 @@ name: Deploy to GitHub Pages
 on:
   push:
     branches:
-      - main
+      - master
 
 jobs:
   deploy:
@@ -16,7 +16,7 @@ jobs:
       - name: Set up Node.js
         uses: actions/setup-node@v2
         with:
-          node-version: '14' # or the version you need
+          node-version: '14'  # or the version you need
 
       - name: Build project
         run: |
@@ -24,12 +24,22 @@ jobs:
           npm run build
 
       - name: Deploy to GitHub Pages
-        env:
-          ACTIONS_DEPLOY_TOKEN: ${{ secrets.ACTIONS_DEPLOY_TOKEN }}
         run: |
           git config --global user.email "you@example.com"
           git config --global user.name "GitHub Actions"
-          git remote set-url origin https://x-access-token:${{ secrets.ACTIONS_DEPLOY_TOKEN }}@github.com/jeffmbai/portfoliov2.git
+
+          # Create the gh-pages branch if it doesn't exist
+          git fetch origin gh-pages || git checkout --orphan gh-pages
+          git reset --hard
+
+          # Check if the build directory exists and copy files
+          if [ -d "build" ]; then
+            cp -r build/* .  # Copy contents of the build directory to root
+          else
+            echo "Build directory does not exist, creating a placeholder."
+            mkdir build
+          fi
+
           git add .
-          git commit -m "Deploy updates from GitHub Actions"
-          git push origin main
+          git commit -m "Deploy updates from GitHub Actions" || echo "No changes to commit"
+          git push --force origin gh-pages
