@@ -84,7 +84,7 @@ const CONFIG = {
     skype: '',
     telegram: '',
     website: '',
-    phone: '',
+    phone: '+254111983314',
     email: 'jeffkinuthia254@gmail.com',
   },
   resume: {
